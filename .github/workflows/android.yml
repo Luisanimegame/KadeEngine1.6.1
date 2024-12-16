@@ -1,4 +1,4 @@
-name: Android Build
+name: Build
 on: workflow_dispatch
 jobs:
   Build:
@@ -50,6 +50,7 @@ jobs:
           haxelib install hxcpp-debug-server
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp
           haxelib git extension-webm https://github.com/Sirox228/extension-webm --quiet
+          haxelib git extension-androidtools https://github.com/MaysLastPlay77/extension-androidtools
           haxelib run lime rebuild hxcpp
           haxelib list
 
@@ -74,6 +75,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         with:
-          name: Tails.EXE-Android
+          name: KadeEngine
           path: export/release/android/bin/app/build/outputs/apk/debug
           if-no-files-found: warn
