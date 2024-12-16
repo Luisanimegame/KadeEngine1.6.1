@@ -56,16 +56,12 @@ class TitleState extends MusicBeatState
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
-		
-		#if !cpp
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
 		PlayerSettings.init();
 
 		KadeEngineData.initSave();
-		
-		#end
 
 				
 		Highscore.load();
