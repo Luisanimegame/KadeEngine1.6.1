@@ -124,6 +124,10 @@ class OptionsMenu extends MusicBeatState
 
 		FlxTween.tween(versionShit,{y: FlxG.height - 18},2,{ease: FlxEase.elasticInOut});
 		FlxTween.tween(blackBorder,{y: FlxG.height - 18},2, {ease: FlxEase.elasticInOut});
+		
+		#if mobile
+		addVirtualPad(UP_DOWN, A_B_C);
+		#end
 
 		super.create();
 	}
@@ -156,27 +160,18 @@ class OptionsMenu extends MusicBeatState
 				
 				changeSelection(curSelected);
 			}
-
-			var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-			if (gamepad != null)
-			{
-				if (gamepad.justPressed.DPAD_UP)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeSelection(-1);
-				}
-				if (gamepad.justPressed.DPAD_DOWN)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeSelection(1);
-				}
-			}
 			
-			if (FlxG.keys.justPressed.UP)
+			if (controls.UP_P)
 				changeSelection(-1);
-			if (FlxG.keys.justPressed.DOWN)
+			if (controls.DOWN_P)
 				changeSelection(1);
+				
+			#if mobile
+			if (virtualPad.buttonC.justPressed) {
+			  removeVirtualPad();
+			  openSubState(new mobile.MobileControlsSubState());
+			}
+			#end
 			
 			if (isCat)
 			{
